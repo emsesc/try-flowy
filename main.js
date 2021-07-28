@@ -1,7 +1,13 @@
-// document.getElementsByClassName('blockelem').addEventListener('click', function() {
-
-// })
-
+document.addEventListener('click', function(event){
+    var stepType = event.target.id
+    if (stepType == "pull-request") {
+        document.getElementById("proplist").innerHTML = '<p class="inputlabel">Title</p><div id="type"><input placeholder="Ex: Ok boomer!"></input></div><p class="inputlabel">Body</p><div id="type"><input placeholder="Please enter markdown"></input></div><p class="inputlabel">Branch to merge</p><div id="type"><input placeholder="Ex: twocatz-frontend"></input></div><p class="inputlabel">Test Files</p><div id="type"><input placeholder="test.1.1.js">'
+    } else if (stepType == "issue-comment") {
+        document.getElementById("proplist").innerHTML = '<p class="inputlabel">Title</p><div id="type"><input placeholder="Ex: Ok boomer!"></input></div><p class="inputlabel">Body</p><div id="type"><input placeholder="Ex: Ok boomer!"></input></div>'
+    } else if (stepType == "feedback") {
+        document.getElementById("proplist").innerHTML = '<p class="inputlabel">Title</p><div id="type"><input placeholder="Ex: Ok boomer!"></input></div><p class="inputlabel">Body</p><div id="type"><input placeholder="Ex: Ok boomer!"></input></div><p class="inputlabel">Webhook URL</p><div id="type"><input placeholder="Try using Slack webhooks!"></input></div>'
+    }
+})
 document.addEventListener("DOMContentLoaded", function(){
     var rightcard = false;
     var tempblock;
@@ -20,10 +26,13 @@ document.addEventListener("DOMContentLoaded", function(){
         var blockin = drag.querySelector(".blockin");
         blockin.parentNode.removeChild(blockin);
         if (drag.querySelector(".blockelemtype").value == "1") {
+            drag.id = "pull-request"
             drag.innerHTML += "<div class='blockyleft' id='pull-request'><img src='assets/eyeblue.svg'><p class='blockyname'>Pull Request Merge</p></div><div class='blockyright'><img src='assets/more.svg'></div><div class='blockydiv'></div><div class='blockyinfo'>When a <span>new visitor</span> goes to <span>Site 1</span></div>";
         } else if (drag.querySelector(".blockelemtype").value == "2") {
+            drag.id = "issue-comment"
             drag.innerHTML += "<div class='blockyleft' id='issue-comment'><img src='assets/actionblue.svg'><p class='blockyname'>Issue Comment</p></div><div class='blockyright'><img src='assets/more.svg'></div><div class='blockydiv'></div><div class='blockyinfo'>When <span>Action 1</span> is performed</div>";
         } else if (drag.querySelector(".blockelemtype").value == "3") {
+            drag.id = "feedback"
             drag.innerHTML += "<div class='blockyleft' id='feedback'><img src='assets/timeblue.svg'><p class='blockyname'>Feedback</p></div><div class='blockyright'><img src='assets/more.svg'></div><div class='blockydiv'></div><div class='blockyinfo'>When <span>10 seconds</span> have passed</div>";
         }
         return true;
@@ -84,14 +93,6 @@ var doneTouch = function (event) {
             rightcard = true;
             document.getElementById("properties").classList.add("expanded");
             
-            var stepType = event.target.innerText
-            if (stepType == "Pull Request Merge") {
-                document.getElementById("proplist").innerHTML = '<p class="inputlabel">Title</p><div id="type"><input placeholder="Ex: Ok boomer!"></input></div><p class="inputlabel">Body</p><div id="type"><input placeholder="Please enter markdown"></input></div><p class="inputlabel">Branch to merge</p><div id="type"><input placeholder="Ex: twocatz-frontend"></input></div><p class="inputlabel">Test Files</p><div id="type"><input placeholder="test.1.1.js">'
-            } else if (stepType == "Issue Comment") {
-                document.getElementById("proplist").innerHTML = '<p class="inputlabel">Title</p><div id="type"><input placeholder="Ex: Ok boomer!"></input></div><p class="inputlabel">Body</p><div id="type"><input placeholder="Ex: Ok boomer!"></input></div>'
-            } else if (stepType == "Feedback") {
-                document.getElementById("proplist").innerHTML = '<p class="inputlabel">Title</p><div id="type"><input placeholder="Ex: Ok boomer!"></input></div><p class="inputlabel">Body</p><div id="type"><input placeholder="Ex: Ok boomer!"></input></div><p class="inputlabel">Webhook URL</p><div id="type"><input placeholder="Try using Slack webhooks!"></input></div>'
-            }
 
             document.getElementById("propwrap").classList.add("itson");
             tempblock.classList.add("selectedblock");
